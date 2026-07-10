@@ -1,34 +1,51 @@
 const tg = window.Telegram?.WebApp;
 if (tg) { tg.ready(); tg.expand(); tg.setHeaderColor("secondary_bg_color"); }
 
-const groups = "ABCDEFGHIJKL".split("");
-const groupElement = document.querySelector("#groups");
-const bracketElement = document.querySelector("#bracket");
+const groupsElement = document.querySelector("#groups");
+const badge = document.querySelector("#badge");
+const groupLabel = document.querySelector("#group-label");
 const selection = document.querySelector("#selection");
+const detail = document.querySelector("#detail");
+const path = document.querySelector("#path");
+const toggle = document.querySelector("#toggle-info");
+const extra = document.querySelector("#extra-info");
 
-const rounds = [
-  { title: "Fase de 32", games: Array.from({ length: 16 }, (_, i) => `Classificados — jogo ${i + 1}`) },
-  { title: "Oitavas", games: Array.from({ length: 8 }, (_, i) => `Vencedores da fase de 32 — jogo ${i + 1}`) },
-  { title: "Quartas", games: Array.from({ length: 4 }, (_, i) => `Vencedores das oitavas — jogo ${i + 1}`) },
-  { title: "Semifinal e final", games: ["Vencedores das quartas — semifinal 1", "Vencedores das quartas — semifinal 2", "Vencedores das semifinais — final"] },
+const stages = [
+  ["01", "Fase de 32", "32 seleções\n16 jogos"],
+  ["02", "Oitavas", "16 seleções\n8 jogos"],
+  ["03", "Quartas", "8 seleções\n4 jogos"],
+  ["04", "Final", "2 seleções\n1 campeão"],
 ];
 
-groups.forEach(letter => {
+"ABCDEFGHIJKL".split("").forEach((letter, index) => {
   const button = document.createElement("button");
-  button.className = "group";
   button.type = "button";
-  button.innerHTML = `<strong>Grupo ${letter}</strong><span>1º e 2º: classificação direta</span>`;
-  button.addEventListener("click", () => {
-    document.querySelectorAll(".group").forEach(item => item.classList.toggle("active", item === button));
-    selection.textContent = `Grupo ${letter}: 1º e 2º avançam; o 3º disputa uma das oito vagas por índice.`;
-    tg?.HapticFeedback?.selectionChanged();
-  });
-  groupElement.append(button);
+  button.className = `group${index === 0 ? " active" : ""}`;
+  button.textContent = letter;
+  button.setAttribute("aria-label", `Selecionar Grupo ${letter}`);
+  button.addEventListener("click", () => selectGroup(letter, button));
+  groupsElement.append(button);
 });
 
-rounds.forEach(round => {
-  const column = document.createElement("section");
-  column.className = "round";
-  column.innerHTML = `<h3>${round.title}</h3><div class="fixtures">${round.games.map((game, i) => `<article class="fixture"><strong>Jogo ${i + 1}</strong><span class="team pending">${game}</span></article>`).join("")}</div>`;
-  bracketElement.append(column);
+function selectGroup(letter, button) {
+  document.querySelectorAll(".group").forEach(item => item.classList.toggle("active", item === button));
+  badge.textContent = letter;
+  groupLabel.textContent = `GRUPO ${letter}`;
+  selection.textContent = "Duas vagas diretas";
+  detail.textContent = "1º e 2º lugares avançam à fase de 32.";
+  tg?.HapticFeedback?.selectionChanged();
+}
+
+stages.forEach(([number, title, stat], index) => {
+  const card = document.createElement("article");
+  card.className = `stage${index === stages.length - 1 ? " final" : ""}`;
+  card.innerHTML = `<div class="stage-number">${number}</div><h3>${title}</h3><span>${stat.replace("\n", "<br>")}</span>`;
+  path.append(card);
+});
+
+toggle.addEventListener("click", () => {
+  const expanded = toggle.getAttribute("aria-expanded") === "true";
+  toggle.setAttribute("aria-expanded", String(!expanded));
+  extra.hidden = expanded;
+  tg?.HapticFeedback?.impactOccurred("light");
 });

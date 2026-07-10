@@ -3,41 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#101b2d" />
+    <meta name="theme-color" content="#081b33" />
     <title>Copa do Mundo 2026 — Chave</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
   <body>
     <main class="app-shell">
-      <header>
-        <p class="eyebrow">FIFA WORLD CUP 2026</p>
-        <h1>Chave de classificação</h1>
-        <p class="subtitle">Mapa da passagem da fase de grupos ao mata-mata.</p>
+      <header class="topbar">
+        <div class="mark" aria-label="Copa 2026">26</div>
+        <div><p class="kicker">COPA DO MUNDO FIFA</p><h1>Rota para a final</h1></div>
+        <a class="source" href="https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/standings" target="_blank" rel="noreferrer" aria-label="Abrir tabela oficial da FIFA">↗</a>
       </header>
 
-      <section class="rules" aria-label="Regras de classificação">
-        <div><strong>12</strong><span>grupos</span></div>
-        <div><strong>24</strong><span>1º e 2º lugares</span></div>
-        <div><strong>8</strong><span>melhores terceiros</span></div>
-        <div><strong>32</strong><span>no mata-mata</span></div>
+      <section class="hero-card" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <span class="live-dot">FORMATO 2026</span>
+          <h2 id="hero-title">48 seleções.<br><em>Uma taça.</em></h2>
+          <p>Acompanhe como cada grupo avança até a decisão.</p>
+        </div>
+        <div class="trophy" aria-hidden="true"><span>♜</span></div>
+        <div class="facts"><span><strong>12</strong> grupos</span><i></i><span><strong>32</strong> no mata-mata</span><i></i><span><strong>104</strong> jogos</span></div>
       </section>
 
-      <section class="section-heading">
-        <div><h2>Fase de grupos</h2><p>Toque em um grupo para destacar sua rota.</p></div>
-        <a href="https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/standings" target="_blank" rel="noreferrer">Tabela oficial FIFA ↗</a>
+      <section class="section-title">
+        <div><p class="kicker">ETAPA 01</p><h2>Fase de grupos</h2></div>
+        <span>Selecione um grupo</span>
       </section>
       <section id="groups" class="groups" aria-label="Grupos da Copa"></section>
 
-      <section class="section-heading bracket-heading">
-        <div><h2>Chave eliminatória</h2><p>Classificados avançam até a final.</p></div>
+      <section class="qualification-card" aria-live="polite">
+        <div class="group-badge" id="badge">A</div>
+        <div class="qualification-copy"><p id="group-label">GRUPO A</p><h3 id="selection">Duas vagas diretas</h3><span id="detail">1º e 2º lugares avançam à fase de 32.</span></div>
+        <button id="toggle-info" type="button" aria-expanded="false">Detalhes <b>⌄</b></button>
+        <div id="extra-info" class="extra-info" hidden>Além dos 24 primeiros e segundos colocados, os oito melhores terceiros colocados completam as 32 vagas do mata-mata.</div>
       </section>
-      <section id="bracket" class="bracket" aria-label="Chave do mata-mata"></section>
 
-      <footer>
-        <span id="selection">Selecione um grupo para visualizar a classificação.</span>
-        <span>Atualizado em 10/07/2026 · Estrutura oficial: 48 seleções, 104 jogos.</span>
-      </footer>
+      <section class="section-title knockout-title">
+        <div><p class="kicker">ETAPA 02</p><h2>Chave eliminatória</h2></div>
+        <span>Jogo único</span>
+      </section>
+      <section id="path" class="path" aria-label="Caminho do mata-mata"></section>
+
+      <footer><span>Dados de estrutura: FIFA World Cup 2026™</span><a href="https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/standings" target="_blank" rel="noreferrer">Ver tabela oficial</a></footer>
     </main>
     <script src="app.js"></script>
   </body>
