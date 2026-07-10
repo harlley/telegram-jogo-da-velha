@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escolher horário</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <main>
+    <p class="label">EXEMPLO GERADO NA HORA</p>
+    <h1>Escolha um horário</h1>
+    <p class="description">Consulta de demonstração · terça-feira, 14 de julho</p>
+    <section id="slots" class="slots" aria-label="Horários disponíveis"></section>
+    <p id="feedback" class="feedback" role="status">Selecione uma opção para continuar.</p>
+    <button id="confirm" disabled>Confirmar horário</button>
+    <details>
+      <summary>O que este exemplo envia ao bot?</summary>
+      <code id="payload">Selecione um horário para ver os dados.</code>
+    </details>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
