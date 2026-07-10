@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#17212b" />
+    <title>Jogo da Velha</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  </head>
+  <body>
+    <main class="app-shell" aria-labelledby="titulo">
+      <header>
+        <p class="eyebrow">TELEGRAM WEB APP</p>
+        <h1 id="titulo">Jogo da Velha</h1>
+        <p class="subtitle">Você é <strong>X</strong>. O bot joga com <strong>O</strong>.</p>
+      </header>
+
+      <section class="scoreboard" aria-label="Placar">
+        <div><span>Você</span><strong id="human-score">0</strong></div>
+        <div><span>Empates</span><strong id="draw-score">0</strong></div>
+        <div><span>Bot</span><strong id="bot-score">0</strong></div>
+      </section>
+
+      <p id="status" class="status" role="status" aria-live="polite">Sua vez.</p>
+
+      <section id="board" class="board" aria-label="Tabuleiro do jogo da velha"></section>
+
+      <div class="actions">
+        <button id="reset" class="secondary" type="button">Nova rodada</button>
+        <button id="share" class="primary" type="button">Compartilhar placar</button>
+      </div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
